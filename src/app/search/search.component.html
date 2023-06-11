@@ -1,0 +1,46 @@
+<h2>
+    User Interface</h2>
+<form (click)="searchSongs()" [formGroup]="searchForm">
+    <input type="text" placeholder="Search for songs" formControlName="name">
+    <button type="button">Search</button>
+</form>
+
+<table class="song-table" *ngIf="searchResults">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Image</th>
+            <th>Year</th>
+            <th>Rating</th>
+            <th>Add Comment</th>
+            <th>Verified</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let song of searchResults">
+            <td>{{ song.name }}</td>
+            <td>{{ song.artistGroup }}</td>
+            <td><img [src]="song.coverPhotoUrl" alt="Cover Photo" class="cover-image"></td>
+            <td>{{ song.year }}</td>
+            <td>
+                <div class="rating-stars">
+                    <span class="star" *ngFor="let star of getStars(song.averageRating)">&#9733;</span>
+                </div>
+            </td>
+            <td>
+                <form (submit)="addComment(song, commentForm)">
+
+                    <input type="text" placeholder="Author" name="author" required [(ngModel)]="commentForm.author">
+                    <input type="text" placeholder="Comment" name="text" required [(ngModel)]="commentForm.text">
+                    <input type="number" placeholder="Rating" name="rating" required [(ngModel)]="commentForm.rating">
+                    <button type="submit" class="add-comment-button">Add Comment</button>
+                </form>
+                <!-- <button type="button" (click)="addComment(song)" class="add-comment-button">Add Comment</button> -->
+            </td>
+            <td>
+                <img src="../../assets/spotify.png" alt="Spotify Verified" class="verified-icon">
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,68 @@
+<h2>Gestor Interface</h2>
+<form class="song-form" (ngSubmit)="addSong()" [formGroup]="songForm">
+    <div class="form-group">
+        <label for="name">Song Name:</label>
+        <input type="text" id="name" formControlName="name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="year">Year:</label>
+        <input type="number" id="year" formControlName="year" required>
+    </div>
+
+    <div class="form-group">
+        <label for="averageRating">Average Rating:</label>
+        <input type="number" id="averageRating" formControlName="averageRating" required>
+    </div>
+
+    <div class="form-group">
+        <label for="artistGroup">Artist Group:</label>
+        <input type="text" id="artistGroup" formControlName="artistGroup" required>
+    </div>
+
+    <div class="form-group">
+        <label for="coverPhotoUrl">Cover Photo URL:</label>
+        <input type="text" id="coverPhotoUrl" formControlName="coverPhotoUrl" required>
+    </div>
+
+    <button type="submit" class="submit-button">Add Song</button>
+</form>
+
+
+
+
+<!-- <ul>
+    <li *ngFor="let item of song">
+        <h3>{{ item.title }} - {{ item.artist }}</h3>
+
+        <ul>
+            <li *ngFor="let comment of item.comments">
+                <p>{{ comment.text }} ({{ comment.rating }}/5)</p>
+                <button (click)="onDeleteComment(song.id, comment.id)">Delete</button>
+            </li>
+        </ul>
+    </li>
+</ul> -->
+<div class="search-form">
+    <label for="songId">Song ID:</label>
+    <input type="text" id="songId" [(ngModel)]="songId">
+    <button (click)="searchSong()">Search</button>
+</div>
+
+<div *ngIf="songFound" class="song-details">
+    <h3>Song Details</h3>
+    <p><strong>Song Name:</strong> {{ song.name }}</p>
+    <p><strong>Artist Group:</strong> {{ song.artistGroup }}</p>
+    <p><strong>Year:</strong> {{ song.year }}</p>
+
+    <h3>Comments</h3>
+    <ul>
+        <li *ngFor="let comment of comments" class="comment-item">
+            <p><strong>Author:</strong> {{ comment.author }}</p>
+            <p><strong>Text:</strong> {{ comment.text }}</p>
+            <p><strong>Rating:</strong> {{ comment.rating }}</p>
+            <p><strong>Date Created:</strong> {{ comment.dateCreated }}</p>
+            <button (click)="deleteComment(comment.id)" class="delete-button">Delete Comment</button>
+        </li>
+    </ul>
+</div>
